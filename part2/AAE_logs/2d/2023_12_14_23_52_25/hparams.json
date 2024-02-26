@@ -1,0 +1,13 @@
+{
+    "z_dim": 8,
+    "batch_size": 64,
+    "lambda_": 1.0,
+    "ae_lr": 0.001,
+    "d_lr": 0.005,
+    "data_dir": "../data/",
+    "epochs": 100,
+    "seed": 42,
+    "num_workers": 4,
+    "log_dir": "AAE_logs/2d/",
+    "no_cuda": false
+}

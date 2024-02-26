@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#SBATCH --partition=gpu
+#SBATCH --gpus=1
+#SBATCH --job-name=AAE_2f_adver-ae
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --time=00:50:00
+#SBTACH --mem=32000M
+#SBATCH --output=AAE_2f_adver-ae-%A.out
+#SBATCH --error=AAE_2f_adver-ae-%A.err
+
+
+module purge
+module load 2022
+module load Anaconda3/2022.05
+
+# Your job starts in the directory where you call sbatch
+# SRC_DIR=/scratch-local/${USER}/DL1/assignment3/part2
+
+# Activate your environment
+source activate dl2023
+lambda_=0.995
+echo "Train adversarial AAE with lambda_=$lambda_ for 2f part of assignment, regularization enabled"
+python train.py --z_dim 2 --lambda_ $lambda_ --ae_lr 0.0001 --log_dir "AAE_logs/2f_adversarial/"

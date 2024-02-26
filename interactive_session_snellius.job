@@ -1,0 +1,41 @@
+#!/bin/bash
+
+#SBATCH --partition=gpu
+#SBATCH --gpus=1
+#SBATCH --job-name=dl_interactive
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --time=01:30:00
+#SBATCH --mem=32000M
+#SBATCH --output=interactive-session-snellius-%A.out
+#SBATCH --error=interactive-session-snellius-%A.err
+
+module purge
+module load 2022
+module load Anaconda3/2022.05
+
+# Your job starts in the directory where you call sbatch
+# SRC_DIR=/scratch-local/${USER}/DL1/assignment3
+
+# Activate your environment
+source activate dl2023
+
+
+export CODE_SERVER_CONFIG=~/.config/code-server/config_dl.yaml
+node=$(/bin/hostname)
+port=10121
+user=${USER} 
+
+if [ -f ${CODE_SERVER_CONFIG} ] ; then
+ rm ${CODE_SERVER_CONFIG}
+fi
+
+echo "bind-addr: ${node}:${port}" >> $CODE_SERVER_CONFIG 
+echo "auth: password" >> $CODE_SERVER_CONFIG
+echo "password: qwerty1234!" >> $CODE_SERVER_CONFIG
+echo "cert: false" >> $CODE_SERVER_CONFIG
+
+echo "Copy the following line in a new terminal to create a secure SSH tunnel between your computer and Ibex compute node."
+echo "ssh -L localhost:${port}:${node}:${port} ${user}@snellius.surf.nl"
+
+code-server --auth=password --verbose

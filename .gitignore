@@ -1,0 +1,10 @@
+**__pycache__
+**data
+.vscode
+*plots_*/
+
+data/
+save/
+../**/data/
+../**/save/
+test_*.txt

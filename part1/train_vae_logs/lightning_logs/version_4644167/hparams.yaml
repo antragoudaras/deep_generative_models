@@ -1,0 +1,3 @@
+lr: 0.001
+num_filters: 32
+z_dim: 20
