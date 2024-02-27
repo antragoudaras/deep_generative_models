@@ -10,7 +10,7 @@ The code is structured in the following way:
 * `utils.py`: Contains functionalities that are required for training, such as the reparameterization trick, the KL divergence, bpd calculation and manifold generation.
 * `unittests.py`: Contains unittests for the Encoder and Decoder networks, as well as functions of `utils.py`. It will hopefully help you debugging your code. Your final code should pass these unittests.
 
-The main missing pieces are:
+The main pieces are:
 * `utils.py`, contains a couple of smaller functions that are used in the training file:
   *  A `sample_reparameterize` function implements the reparameterization trick, i.e. sampling from a distribution with means and standard deviation that require gradients.
   * A `KLD` function implements the KL divergence of the unit Gaussian prior and the predicted distribution.
